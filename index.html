@@ -2,23 +2,23 @@
 <html lang="vi">
 <head>
   <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
   <meta name="theme-color" content="#101827">
   <title>Pulse — RSS Reader</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700;800&family=Manrope:wght@500;600;700;800&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="/style.css">
+  <link rel="stylesheet" href="./style.css">
 </head>
 <body>
   <div class="app-shell">
     <aside class="sidebar" id="sidebar">
       <a class="brand" href="#"><span class="brand-mark">✳</span><span>pulse<span class="brand-dot">.</span></span></a>
-      <button class="add-feed" id="openAdd"><span>＋</span> Thêm nguồn tin</button>
+      <button type="button" class="add-feed" id="openAdd"><span>＋</span> Thêm nguồn tin</button>
       <div class="nav-label">THƯ VIỆN</div>
-      <button class="nav-item active" data-view="all"><span>▤</span> Tất cả bài viết <span class="nav-count" id="allCount">0</span></button>
-      <button class="nav-item" data-view="unread"><span>◉</span> Chưa đọc <span class="nav-count" id="unreadCount">0</span></button>
-      <button class="nav-item" data-view="saved"><span>☆</span> Đã lưu <span class="nav-count" id="savedCount">0</span></button>
-      <div class="nav-label sources-label">NGUỒN CỦA BẠN <button id="addSmall" aria-label="Thêm nguồn">＋</button></div>
+      <button type="button" class="nav-item active" data-view="all"><span>▤</span> Tất cả bài viết <span class="nav-count" id="allCount">0</span></button>
+      <button type="button" class="nav-item" data-view="unread"><span>◉</span> Chưa đọc <span class="nav-count" id="unreadCount">0</span></button>
+      <button type="button" class="nav-item" data-view="saved"><span>☆</span> Đã lưu <span class="nav-count" id="savedCount">0</span></button>
+      <div class="nav-label sources-label">NGUỒN CỦA BẠN <button type="button" id="addSmall" aria-label="Thêm nguồn">＋</button></div>
       <div id="feedList" class="feed-list"><div class="empty-side">Chưa có nguồn RSS</div></div>
       <div class="sidebar-bottom"><span class="status-dot"></span> Đồng bộ trên thiết bị này</div>
     </aside>
@@ -28,8 +28,8 @@
         <div class="mobile-brand">✳ pulse<span>.</span></div>
         <div class="breadcrumb">Thư viện <span>/</span> <b id="pageTitle">Tất cả bài viết</b></div>
         <div class="top-actions">
-          <button class="ghost-btn" id="markAllReadBtn" title="Đánh dấu đã đọc tất cả">Đọc tất cả</button>
-          <button class="icon-btn" id="refreshBtn" title="Làm mới">↻</button>
+          <button type="button" class="ghost-btn" id="markAllReadBtn" title="Đánh dấu đã đọc tất cả">Đọc tất cả</button>
+          <button type="button" class="icon-btn" id="refreshBtn" title="Làm mới">↻</button>
           <div class="avatar">P</div>
         </div>
       </header>
@@ -59,12 +59,12 @@
             <div class="empty-icon">✳</div>
             <h2>Bắt đầu với nguồn tin đầu tiên</h2>
             <p>Thêm một đường dẫn RSS hoặc Atom để gom bài viết về đây.</p>
-            <button class="primary-btn" id="emptyAdd">＋ Thêm nguồn RSS</button>
+            <button type="button" class="primary-btn" id="emptyAdd">＋ Thêm nguồn RSS</button>
             <div class="examples">
               <span>Gợi ý:</span>
-              <button data-url="https://vnexpress.net/rss/tin-moi-nhat.rss">VnExpress</button>
-              <button data-url="https://feeds.bbci.co.uk/news/world/rss.xml">BBC World</button>
-              <button data-url="https://hnrss.org/frontpage">Hacker News</button>
+              <button type="button" data-url="https://vnexpress.net/rss/tin-moi-nhat.rss">VnExpress</button>
+              <button type="button" data-url="https://feeds.bbci.co.uk/news/world/rss.xml">BBC World</button>
+              <button type="button" data-url="https://hnrss.org/frontpage">Hacker News</button>
             </div>
           </div>
         </div>
@@ -79,15 +79,15 @@
           <div class="eyebrow">MỞ RỘNG THƯ VIỆN</div>
           <h2>Thêm nguồn RSS</h2>
         </div>
-        <button class="close-btn" value="cancel" aria-label="Đóng">×</button>
+        <button type="button" class="close-btn" id="closeAdd" aria-label="Đóng">×</button>
       </div>
       <p class="dialog-copy">Dán URL RSS hoặc Atom. Pulse sẽ tự lấy tiêu đề và bài viết mới nhất.</p>
       <label for="feedUrl">Đường dẫn nguồn</label>
       <input id="feedUrl" type="url" placeholder="https://example.com/feed.xml" required>
       <div class="dialog-error" id="dialogError"></div>
       <div class="dialog-actions">
-        <button class="secondary-btn" value="cancel">Để sau</button>
-        <button class="primary-btn" id="submitFeed" value="default">Thêm nguồn <span>→</span></button>
+        <button type="button" class="secondary-btn" id="cancelAdd">Để sau</button>
+        <button type="submit" class="primary-btn" id="submitFeed">Thêm nguồn <span>→</span></button>
       </div>
     </form>
   </dialog>
@@ -96,13 +96,13 @@
     <div class="reader-toolbar">
       <span class="eyebrow">ĐANG ĐỌC</span>
       <div class="reader-actions">
-        <button class="ghost-btn" id="toggleReadBtn">Đánh dấu chưa đọc</button>
-        <button class="close-btn" id="closeReader" aria-label="Đóng">×</button>
+        <button type="button" class="ghost-btn" id="toggleReadBtn">Đánh dấu chưa đọc</button>
+        <button type="button" class="close-btn" id="closeReader" aria-label="Đóng">×</button>
       </div>
     </div>
     <article id="readerContent"></article>
   </dialog>
 
-  <script src="/app.js"></script>
+  <script src="./app.js"></script>
 </body>
 </html>
