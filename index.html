@@ -1,0 +1,59 @@
+<!doctype html>
+<html lang="vi">
+<head>
+  <meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+  <meta name="theme-color" content="#101827">
+  <title>Pulse — RSS Reader</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700;800&family=Manrope:wght@500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="/style.css">
+</head>
+<body>
+  <div class="app-shell">
+    <aside class="sidebar">
+      <a class="brand" href="#"><span class="brand-mark">✳</span><span>pulse<span class="brand-dot">.</span></span></a>
+      <button class="add-feed" id="openAdd"><span>＋</span> Thêm nguồn tin</button>
+      <div class="nav-label">THƯ VIỆN</div>
+      <button class="nav-item active" data-view="all"><span>▤</span> Tất cả bài viết <span class="nav-count" id="allCount">0</span></button>
+      <button class="nav-item" data-view="unread"><span>◉</span> Chưa đọc <span class="nav-count" id="unreadCount">0</span></button>
+      <button class="nav-item" data-view="saved"><span>☆</span> Đã lưu</button>
+      <div class="nav-label sources-label">NGUỒN CỦA BẠN <button id="addSmall" aria-label="Thêm nguồn">＋</button></div>
+      <div id="feedList" class="feed-list"><div class="empty-side">Chưa có nguồn RSS</div></div>
+      <div class="sidebar-bottom"><span class="status-dot"></span> Đồng bộ trên thiết bị này</div>
+    </aside>
+
+    <main class="main">
+      <header class="topbar">
+        <div class="mobile-brand">✳ pulse<span>.</span></div>
+        <div class="breadcrumb">Thư viện <span>/</span> <b id="pageTitle">Tất cả bài viết</b></div>
+        <div class="top-actions"><button class="icon-btn" id="refreshBtn" title="Làm mới">↻</button><div class="avatar">P</div></div>
+      </header>
+      <section class="content">
+        <div class="welcome-row">
+          <div><div class="eyebrow">BẢN TIN CỦA BẠN</div><h1 id="heading">Tất cả bài viết<span>.</span></h1><p class="subtitle" id="subheading">Mọi nội dung bạn quan tâm, trong một nơi.</p></div>
+          <div class="date-chip" id="today"></div>
+        </div>
+        <div class="toolbar">
+          <div class="search-wrap"><span>⌕</span><input id="searchInput" type="search" placeholder="Tìm kiếm bài viết..." autocomplete="off"><kbd>⌘ K</kbd></div>
+          <select id="sortSelect" aria-label="Sắp xếp"><option value="new">Mới nhất</option><option value="old">Cũ nhất</option></select>
+        </div>
+        <div class="feed-summary" id="summary"></div>
+        <div id="articles" class="article-list">
+          <div class="welcome-empty"><div class="empty-icon">✳</div><h2>Bắt đầu với nguồn tin đầu tiên</h2><p>Thêm một đường dẫn RSS hoặc Atom để gom bài viết về đây.</p><button class="primary-btn" id="emptyAdd">＋ Thêm nguồn RSS</button><div class="examples"><span>Gợi ý:</span><button data-url="https://vnexpress.net/rss/tin-moi-nhat.rss">VnExpress</button><button data-url="https://feeds.bbci.co.uk/news/world/rss.xml">BBC World</button><button data-url="https://hnrss.org/frontpage">Hacker News</button></div></div>
+        </div>
+      </section>
+    </main>
+  </div>
+
+  <dialog id="addDialog">
+    <form method="dialog" id="addForm">
+      <div class="dialog-top"><div><div class="eyebrow">MỞ RỘNG THƯ VIỆN</div><h2>Thêm nguồn RSS</h2></div><button class="close-btn" value="cancel" aria-label="Đóng">×</button></div>
+      <p class="dialog-copy">Dán URL RSS hoặc Atom. Pulse sẽ tự lấy tiêu đề và bài viết mới nhất.</p>
+      <label for="feedUrl">Đường dẫn nguồn</label><input id="feedUrl" type="url" placeholder="https://example.com/feed.xml" required>
+      <div class="dialog-error" id="dialogError"></div>
+      <div class="dialog-actions"><button class="secondary-btn" value="cancel">Để sau</button><button class="primary-btn" id="submitFeed" value="default">Thêm nguồn <span>→</span></button></div>
+    </form>
+  </dialog>
+  <dialog id="readerDialog" class="reader-dialog"><div class="reader-toolbar"><span class="eyebrow">ĐANG ĐỌC</span><button class="close-btn" id="closeReader">×</button></div><article id="readerContent"></article></dialog>
+  <script src="/app.js"></script>
+</body></html>
